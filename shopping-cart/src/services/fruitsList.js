@@ -1,29 +1,34 @@
 const fruitList = [
   {
+    id: 1,
     name: "Banana",
     price: 6.0,
     unit: "KG",
     img: "https://cdnconfianca.loja.biz/media/catalog/product/cache/1/image/1200x630/9df78eab33525d08d6e5fb8d27136e95/1/1/114476-6.jpg.jpg",
   },
   {
+    id: 2,
     name: "Maçã",
     price: 3.0,
     unit: "KG",
     img: "https://trimais.vteximg.com.br/arquivos/ids/1029225-1000-1000/foto_original.jpg?v=637734426016570000",
   },
   {
+    id: 3,
     name: "Laranja",
     price: 5.5,
     unit: "KG",
     img: "https://cdn.awsli.com.br/600x700/305/305913/produto/10002147/laranja-f4abaf7d.jpg",
   },
   {
+    id: 4,
     name: "Abacate",
     price: 5.0,
     unit: "UN",
     img: "https://cdn.awsli.com.br/600x700/305/305913/produto/10491472/062babe45a.jpg",
   },
   {
+    id: 5,
     name: "Manga",
     price: 6.0,
     unit: "UN",
