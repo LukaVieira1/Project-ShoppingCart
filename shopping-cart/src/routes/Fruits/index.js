@@ -9,13 +9,19 @@ import {
   NumberInput,
   NumberDecrementStepper,
   Flex,
-  Spacer,
   Button,
 } from "@chakra-ui/react";
+
 import { FruitsBox, FruitBox, FruitImg } from "./styles";
 
 const Fruits = () => {
+  const [amount, setAmount] = useState([]);
+  const handleChange = (value) => {
+    fruitList.map((fruit) => setAmount[fruit](value));
+  };
+
   const [fruits, setFruits] = useState([]);
+  console.log(amount);
   useEffect(() => {
     setFruits(fruitList);
   }, []);
@@ -55,8 +61,10 @@ const Fruits = () => {
                       / {fruit.unit}
                     </Box>
                   </Box>
-                  {/* <Spacer /> */}
+
                   <NumberInput
+                    onChange={handleChange}
+                    value={amount[fruit]}
                     ml="60px"
                     size="xs"
                     maxW={16}
@@ -70,6 +78,7 @@ const Fruits = () => {
                     </NumberInputStepper>
                   </NumberInput>
                 </Flex>
+                <p>Total: R$ {(amount[fruit] * fruit.price).toFixed(2)}</p>
                 <Button mt="5px" ml="30px" colorScheme="blue">
                   Adicionar no carrinho
                 </Button>
