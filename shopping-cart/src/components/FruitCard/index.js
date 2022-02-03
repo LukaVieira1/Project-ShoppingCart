@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   Box,
@@ -16,15 +16,14 @@ import {
 import { FruitsBox, FruitBox, FruitImg } from "./styles";
 
 const FruitCard = (props) => {
-  const { name, price, unit, img, id } = props;
+  const [cart, setCart] = useState();
+  const { name, price, unit, img, id, onClick } = props;
   const [amount, setAmount] = useState(0);
   const handleChange = (value) => setAmount(value);
   const FruitKart = { id, name, img, amount, total: amount * price };
-  const handleClick = () => localStorage.setItem(id, JSON.stringify(FruitKart));
 
-  // const FruitKart = { id, name, img, amount, total: amount * price };
-  // const handleClick = (event) =>
-  //   localStorage.setItem(id, JSON.stringify(FruitKart));
+  const handleClick = (event) =>
+    localStorage.setItem(id, JSON.stringify(FruitKart));
 
   return (
     <>
@@ -48,7 +47,11 @@ const FruitCard = (props) => {
           </Box>
           <Flex>
             <Box ml="35px">
-              R${price.toFixed(2)}
+              {Number(price.toFixed(2)).toLocaleString("pt-BR", {
+                currency: "BRL",
+                style: "currency",
+                minimumFractionDigits: 2,
+              })}
               <Box as="span" color="gray.600" fontSize="sm">
                 / {unit}
               </Box>
@@ -72,9 +75,13 @@ const FruitCard = (props) => {
             </NumberInput>
           </Flex>
           <Text fontSize="md" ml="80px" mt="10px">
-            Total: R$ {(amount * price).toFixed(2)}
+            Total:
+            {Number((amount * price).toFixed(2)).toLocaleString("pt-BR", {
+              currency: "BRL",
+              style: "currency",
+              minimumFractionDigits: 2,
+            })}
           </Text>
-
           <Button
             onClick={handleClick}
             mt="5px"
