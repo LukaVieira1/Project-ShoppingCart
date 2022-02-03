@@ -13,17 +13,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import { FruitsBox, FruitBox, FruitImg } from "./styles";
+import { FruitImg } from "./styles";
 
 const FruitCard = (props) => {
   const [cart, setCart] = useState();
   const { name, price, unit, img, id, onClick } = props;
   const [amount, setAmount] = useState(0);
   const handleChange = (value) => setAmount(value);
-  const FruitKart = { id, name, img, amount, total: amount * price };
-
-  const handleClick = (event) =>
-    localStorage.setItem(id, JSON.stringify(FruitKart));
 
   return (
     <>
@@ -83,7 +79,9 @@ const FruitCard = (props) => {
             })}
           </Text>
           <Button
-            onClick={handleClick}
+            onClick={() =>
+              onClick({ id, name, img, amount, total: amount * price })
+            }
             mt="5px"
             ml="30px"
             colorScheme="blue"

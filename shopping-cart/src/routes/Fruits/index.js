@@ -1,39 +1,30 @@
 import { useState, useEffect } from "react";
 import fruitList from "../../services/fruitsList";
 import FruitCard from "../../components/FruitCard/";
-import { Flex, Button, filter } from "@chakra-ui/react";
+import { Flex, Button } from "@chakra-ui/react";
 import { Link, Outlet } from "react-router-dom";
+import Header from "../../components/Header";
+import { getItem, setItem } from "../../helpers/storageHelper.js";
 
 const Fruits = () => {
   const [fruits, setFruits] = useState([]);
-  // use State do carrinho
 
   useEffect(() => {
     setFruits(fruitList);
   }, []);
 
-  // useEffect(() => {
-  //   const cart = localStorage.getItem("carrinho");
-  //   console.log(cart);
-  //   setCart(cart);
-  // }, [cart]);
-
-  // const addCarrihnho = (id) =>{
-  //   altera cart
-  //   setCart(prevState =>{
-  //     {
-  //       ...prevState,
-  //       {
-  //         x
-  //       }
-  //     }
-  //   })
-
-  // }
+  const handleClick = (fruit) => {
+    const cart = getItem();
+    console.log(cart);
+    const newCart = cart.filter((item) => item.id !== fruit.id);
+    newCart.push(fruit);
+    setItem(newCart);
+  };
 
   return (
     <>
-      <Flex justify={"space-evenly"} wrap={"wrap"}>
+      <Header>Fruteira PL, pagou levou</Header>
+      <Flex justify={"space-evenly"} wrap={"wrap"} mt={100}>
         {fruits?.map((fruit) => (
           <FruitCard
             key={fruit.id}
@@ -42,16 +33,17 @@ const Fruits = () => {
             price={fruit.price}
             unit={fruit.unit}
             img={fruit.img}
-            // onClick= {handleClick}
+            onClick={handleClick}
           />
         ))}
       </Flex>
-
-      <Link to="/cart">
-        <Button mt="5px" ml="30px" colorScheme="blue">
-          Vizualizar carrinho
-        </Button>
-      </Link>
+      <Flex justify="center" mt="100px">
+        <Link to="/cart">
+          <Button mt="5px" ml="30px" size="lg" colorScheme="blue">
+            Vizualizar carrinho
+          </Button>
+        </Link>
+      </Flex>
     </>
   );
 };
