@@ -16,8 +16,7 @@ import {
 import { FruitImg } from "./styles";
 
 const FruitCard = (props) => {
-  const [cart, setCart] = useState();
-  const { name, price, unit, img, id, onClick } = props;
+  const { name, price, unit, img, id, handleClick } = props;
   const [amount, setAmount] = useState(0);
   const handleChange = (value) => setAmount(value);
 
@@ -80,7 +79,14 @@ const FruitCard = (props) => {
           </Text>
           <Button
             onClick={() =>
-              onClick({ id, name, img, amount, total: amount * price })
+              handleClick({
+                id,
+                name,
+                img,
+                amount,
+                total: amount * price,
+                unit,
+              })
             }
             mt="5px"
             ml="30px"

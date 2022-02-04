@@ -15,7 +15,6 @@ const Fruits = () => {
 
   const handleClick = (fruit) => {
     const cart = getItem();
-    console.log(cart);
     const newCart = cart.filter((item) => item.id !== fruit.id);
     newCart.push(fruit);
     setItem(newCart);
@@ -33,7 +32,7 @@ const Fruits = () => {
             price={fruit.price}
             unit={fruit.unit}
             img={fruit.img}
-            onClick={handleClick}
+            handleClick={handleClick}
           />
         ))}
       </Flex>
