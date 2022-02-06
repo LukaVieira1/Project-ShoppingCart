@@ -6,3 +6,7 @@ export const FruitImg = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const Div = styled.div`
+  width: 1000px;
+`;

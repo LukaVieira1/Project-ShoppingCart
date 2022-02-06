@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-
 import {
   Box,
   Image,
@@ -11,6 +10,7 @@ import {
   Flex,
   Button,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 import { FruitImg } from "./styles";
@@ -19,7 +19,7 @@ const FruitCard = (props) => {
   const { name, price, unit, img, id, handleClick } = props;
   const [amount, setAmount] = useState(0);
   const handleChange = (value) => setAmount(value);
-
+  const toast = useToast();
   return (
     <>
       <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -78,7 +78,7 @@ const FruitCard = (props) => {
             })}
           </Text>
           <Button
-            onClick={() =>
+            onClick={() => {
               handleClick({
                 id,
                 name,
@@ -86,8 +86,15 @@ const FruitCard = (props) => {
                 amount,
                 total: amount * price,
                 unit,
-              })
-            }
+                price,
+              });
+              toast({
+                title: "Item adicionado",
+                description: "O item foi adicionado com sucesso no carrinho",
+                status: "success",
+                duration: 1000,
+              });
+            }}
             mt="5px"
             ml="30px"
             colorScheme="blue"

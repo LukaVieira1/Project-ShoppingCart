@@ -4,7 +4,7 @@ import FruitCard from "../../components/FruitCard/";
 import { Flex, Button } from "@chakra-ui/react";
 import { Link, Outlet } from "react-router-dom";
 import Header from "../../components/Header";
-import { getItem, setItem } from "../../helpers/storageHelper.js";
+import { getItem, setItem, sortByID } from "../../helpers/storageHelper.js";
 
 const Fruits = () => {
   const [fruits, setFruits] = useState([]);
@@ -17,6 +17,7 @@ const Fruits = () => {
     const cart = getItem();
     const newCart = cart.filter((item) => item.id !== fruit.id);
     newCart.push(fruit);
+    sortByID(newCart);
     setItem(newCart);
   };
 
